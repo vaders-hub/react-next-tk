@@ -15,10 +15,10 @@ const middlewares: Middleware[] = [pokemonApi.middleware];
 export default function configureAppStore(preloadedState: any) {
   const store = configureStore({
     reducer: rootReducer,
-    middleware: getDefaultMiddleware => [...getDefaultMiddleware().prepend(listenerMiddleware.middleware), ...middlewares] as any,
+    middleware: gDM => [...gDM().prepend(listenerMiddleware.middleware), ...middlewares] as any,
     devTools: process.env.NODE_ENV !== 'production',
     preloadedState,
-    enhancers: [monitorReducersEnhancer],
+    // enhancers: [monitorReducersEnhancer],
   });
 
   if (process.env.NODE_ENV !== 'production' && module.hot) {

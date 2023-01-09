@@ -38,16 +38,14 @@
     }
   },
   "rules": {
-    // off: 0, warn: 1, error: 2  (cf. https://eslint.org/docs/rules/)
     "indent": 0,
-    //    "space-before-function-paren": 2,
     "no-mixed-spaces-and-tabs": 2,
     "no-case-declarations": 0,
     "quotes": [2, "single"],
     "comma-spacing": [2, { "before": false, "after": true }],
     "key-spacing": [2, { "beforeColon": false }],
     "space-infix-ops": 2,
-    "prefer-const": 1,
+    "prefer-const": 0,
     "import/no-unresolved": 0,
     "prettier/prettier": 2,
     "for-direction": 2,
