@@ -1,11 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import axiosBaseQuery from 'src/configs/common/axios';
+import { emptyPokemonApi } from './pokemon-api';
 
-export const pokemonApi = createApi({
-  reducerPath: 'pokemonApi',
-  baseQuery: axiosBaseQuery({
-    baseUrl: 'https://pokeapi.co/api/v2/',
-  }),
+const apiWithTag = emptyPokemonApi.enhanceEndpoints({ addTagTypes: ['pokemons'] });
+
+export const pokemonApi = apiWithTag.injectEndpoints({
   endpoints: build => ({
     getPokemonByName: build.query({ query: (name: string) => ({ url: `pokemon/${name}`, method: 'get' }) }),
     mutation: build.mutation({

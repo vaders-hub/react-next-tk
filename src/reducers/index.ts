@@ -1,11 +1,13 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 import counterReducer from 'src/features/counter/counterSlice';
-import { pokemonApi } from 'src/services/pokemon';
+import { emptyPokemonApi } from 'src/services/pokemon-api';
+import { emptyMemberApi } from 'src/services/member-api';
 
 const rootReducer = combineReducers({
   counter: counterReducer,
-  [pokemonApi.reducerPath]: pokemonApi.reducer,
+  [emptyPokemonApi.reducerPath]: emptyPokemonApi.reducer,
+  [emptyMemberApi.reducerPath]: emptyMemberApi.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

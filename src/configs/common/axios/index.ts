@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { store } from 'src/store';
+import { store } from 'src/configs/store';
 
 import type { AxiosRequestConfig, AxiosError } from 'axios';
 import type { BaseQueryFn } from '@reduxjs/toolkit/query';

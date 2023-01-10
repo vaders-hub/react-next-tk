@@ -1,7 +1,8 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
 import counterReducer, { increment, decrement, incrementByAmount } from 'src/features/counter/counterSlice';
-import { store } from 'src/store';
-import { pokemonApi } from 'src/services/pokemon';
+import { store } from 'src/configs/store';
+import { emptyPokemonApi } from 'src/services/pokemon-api';
+import { emptyMemberApi } from 'src/services/member-api';
 
 import type {
   TypedStartListening,
@@ -28,10 +29,15 @@ const incListener = async (action: ListenerAction, listenerApi: ListenerApi) => 
     return 42;
   });
 
-  // TO-DO : RTQuery type 설정
-  const { getPokemonByName }: any = pokemonApi.endpoints;
-  const { data } = await store.dispatch(getPokemonByName.initiate('bulbasaur'));
+  // TODO : RTQuery type 설정
+  // const { getPokemonByName }: any = emptyPokemonApi.endpoints;
+  // const { data: pokemonData } = await listenerApi.dispatch(getPokemonByName.initiate('bulbasaur'));
+  // const { getMemberInfo }: any = emptyMemberApi.endpoints;
+  // const { data: memberData } = await listenerApi.dispatch(getMemberInfo.initiate());
 
+  // select
+  // const resultS = getPokemonByName.select()(listenerApi.getState());
+  // const { data, status, error } = resultS;
   const result = await task.result;
   // Unwrap the child result in the listener
   if (result.status === 'ok') {
@@ -40,9 +46,9 @@ const incListener = async (action: ListenerAction, listenerApi: ListenerApi) => 
   }
 };
 const decListener = async (action: ListenerAction, listenerApi: ListenerApi) => {
-  // TO-DO : RTQuery type 설정
-  const { getPokemonByName }: any = pokemonApi.endpoints;
-  const { data } = await store.dispatch(getPokemonByName.initiate('bulbasaur'));
+  // TODO : RTQuery type 설정
+  const { getPokemonByName }: any = emptyPokemonApi.endpoints;
+  const { data } = await listenerApi.dispatch(getPokemonByName.initiate('bulbasaur'));
 };
 
 listenerMiddleware.startListening({ actionCreator: increment, effect: incListener });

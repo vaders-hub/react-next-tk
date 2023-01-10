@@ -1,5 +1,5 @@
 import { FC, Fragment } from 'react';
-import { store } from 'src/store';
+import { store, wrapper } from 'src/configs/store';
 import { Provider } from 'react-redux';
 
 import type { NextComponentType } from 'next';
@@ -9,11 +9,12 @@ type CustomNextComponent = NextComponentType & { Layout?: FC };
 type CustomAppProps = AppProps & { Component: CustomNextComponent };
 
 const MyApp = ({ Component, pageProps }: CustomAppProps) => {
+  const { store, props } = wrapper.useWrappedStore(pageProps);
   const Layout: CustomNextComponent | typeof Fragment = Component.Layout ? Component.Layout : Fragment;
   return (
     <Provider store={store}>
       <Layout>
-        <Component {...pageProps} />
+        <Component {...props} />
       </Layout>
     </Provider>
   );

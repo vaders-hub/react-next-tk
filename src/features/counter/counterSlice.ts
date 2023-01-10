@@ -1,4 +1,6 @@
+import { HYDRATE } from 'next-redux-wrapper';
 import { createSlice } from '@reduxjs/toolkit';
+
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface CounterState {
@@ -14,10 +16,6 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     increment: state => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
       state.value += 1;
     },
     decrement: state => {
@@ -27,6 +25,21 @@ export const counterSlice = createSlice({
       state.value += action.payload;
     },
   },
+  extraReducers: builder => {
+    builder.addCase(increment, (state, action) => {
+      // action is inferred correctly here if using TS
+    });
+    // [HYDRATE]: (state, action) => {
+    //   // IMPORTANT - for server side hydration
+
+    //   if (!action.payload.profile.name) {
+    //     // IMPORTANT - for not overriding data on client side
+    //     return state;
+    //   }
+
+    //   state.value = action.payload.value;
+    // },
+  },
   // prepare(payload: number, vaule: number) {
   //   return { payload, meta: { vaule } };
   // },
@@ -34,5 +47,6 @@ export const counterSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const selectValue = (state: CounterState) => state.value;
 
 export default counterSlice.reducer;
