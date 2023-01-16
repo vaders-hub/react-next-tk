@@ -19,11 +19,16 @@ const AdminPage = (props: { name: string }) => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
   const { req, res } = context;
 
+  const currentState = store.getState();
+  const {
+    counter: { value },
+  } = currentState;
+  console.log('currentState', value);
   const { getPokemonByName }: any = emptyPokemonApi.endpoints;
   const {
     data: { name },
   } = await store.dispatch(getPokemonByName.initiate('bulbasaur'));
-  await store.dispatch(increment());
+  if (value === 0) await store.dispatch(increment());
 
   return {
     props: { name },

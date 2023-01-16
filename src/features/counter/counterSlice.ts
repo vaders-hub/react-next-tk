@@ -37,7 +37,6 @@ export const counterSlice = createSlice({
       const stateDiff = diff(state, action.payload);
       const isDiff = stateDiff?.value?.[0];
       const fromSSR = action.payload.counter.value;
-      const isClient = typeof window !== 'undefined';
       console.log('HYDRATEHYDRATE', isDiff, fromSSR, typeof window);
 
       state.value = isDiff ? isDiff : fromSSR ? isDiff + fromSSR : 0;
