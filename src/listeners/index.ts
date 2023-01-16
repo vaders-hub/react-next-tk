@@ -12,7 +12,7 @@ import type {
   ThunkDispatch,
   AnyAction,
 } from '@reduxjs/toolkit';
-import type { RootState } from 'src/store';
+import type { RootState } from 'src/configs/store';
 
 const listenerMiddleware = createListenerMiddleware();
 
@@ -20,8 +20,8 @@ type ListenerAction = Record<string, unknown>;
 type ListenerApi = ListenerEffectAPI<unknown, ThunkDispatch<unknown, unknown, AnyAction>, unknown>;
 
 const incListener = async (action: ListenerAction, listenerApi: ListenerApi) => {
-  console.log('Previous action ', action);
-  console.log('Current state ', listenerApi.getState());
+  // console.log('Previous action ', action);
+  // console.log('Current state ', listenerApi.getState());
   // Spawn a child task and start it immediately
   const task = listenerApi.fork(async forkApi => {
     await forkApi.delay(5);
@@ -35,6 +35,7 @@ const incListener = async (action: ListenerAction, listenerApi: ListenerApi) => 
   // const { getMemberInfo }: any = emptyMemberApi.endpoints;
   // const { data: memberData } = await listenerApi.dispatch(getMemberInfo.initiate());
 
+  // console.log('datadata', memberData);
   // select
   // const resultS = getPokemonByName.select()(listenerApi.getState());
   // const { data, status, error } = resultS;
@@ -42,7 +43,7 @@ const incListener = async (action: ListenerAction, listenerApi: ListenerApi) => 
   // Unwrap the child result in the listener
   if (result.status === 'ok') {
     // Logs the `42` result value that was returned
-    console.log('Child succeeded: ', result.value);
+    // console.log('Child succeeded: ', result.value);
   }
 };
 const decListener = async (action: ListenerAction, listenerApi: ListenerApi) => {

@@ -1,4 +1,4 @@
-import { createStore, Store } from 'redux';
+import { Store } from 'redux';
 import { configureStore, Middleware, createListenerMiddleware } from '@reduxjs/toolkit';
 import { createWrapper, Context, HYDRATE } from 'next-redux-wrapper';
 
@@ -9,7 +9,8 @@ import rootReducer from 'src/reducers';
 import { pokemonApi } from 'src/services/pokemon';
 import { memberApi } from 'src/services/member';
 
-type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
 
 // TODO: injectEndpoints 직접 사용 여부 확인
 const middlewares: Middleware[] = [pokemonApi.middleware, memberApi.middleware];
@@ -30,4 +31,4 @@ if (process.env.NODE_ENV !== 'production' && module.hot) {
   module.hot.accept('src/reducers', () => store.replaceReducer(rootReducer));
 }
 
-export const wrapper = createWrapper<Store<RootState>>(makeStore, { debug: true });
+export const wrapper = createWrapper<Store<RootState>>(makeStore, { debug: false });

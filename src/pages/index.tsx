@@ -1,4 +1,5 @@
 import { wrapper } from 'src/configs/store';
+import { reset } from 'src/features/counter/counterSlice';
 import Image from 'next/image';
 
 import MainLayout from 'src/layouts/main';
@@ -14,6 +15,7 @@ const HomePage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
+  // store.dispatch(reset());
   return {
     props: {},
   };

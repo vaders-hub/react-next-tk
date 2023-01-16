@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from 'src/hooks/useRedux';
-import { decrement, increment } from 'src/features/counter/counterSlice';
+import { decrement, increment, selectCount } from 'src/features/counter/counterSlice';
 
 const Counter = () => {
   const count = useAppSelector(state => state.counter.value);
