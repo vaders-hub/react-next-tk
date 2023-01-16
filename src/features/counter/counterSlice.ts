@@ -3,8 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { diff } from 'jsondiffpatch';
 
 import type { RootState } from 'src/reducers';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { stat } from 'fs';
+import type { PayloadAction, AnyAction } from '@reduxjs/toolkit';
 
 export interface CounterState {
   value: number;
@@ -33,13 +32,15 @@ export const counterSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(HYDRATE, (state: any, action: any) => {
+    builder.addCase(HYDRATE, (state, action: AnyAction) => {
       const stateDiff = diff(state, action.payload);
       const isDiff = stateDiff?.value?.[0];
-      const fromSSR = action.payload.counter.value;
-      console.log('HYDRATEHYDRATE', isDiff, fromSSR, typeof window);
 
-      state.value = isDiff ? isDiff : fromSSR ? isDiff + fromSSR : 0;
+      return {
+        ...state,
+        ...action.payload,
+        value: isDiff ? state.value : action.payload.counter.value,
+      };
     });
   },
   // prepare(payload: number, vaule: number) {
@@ -47,7 +48,6 @@ export const counterSlice = createSlice({
   // },
 });
 
-// Action creators are generated for each case reducer function
 export const { increment, decrement, incrementByAmount, reset } = counterSlice.actions;
 export const selectCount = (state: RootState) => state.counter.value;
 

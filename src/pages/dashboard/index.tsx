@@ -23,15 +23,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
   const {
     counter: { value },
   } = currentState;
-  console.log('currentState', value);
+  console.log('getServerSideProps >>', value);
   const { getPokemonByName }: any = emptyPokemonApi.endpoints;
-  const {
-    data: { name },
-  } = await store.dispatch(getPokemonByName.initiate('bulbasaur'));
+  const data = await store.dispatch(getPokemonByName.initiate('bulbasaur'));
   if (value === 0) await store.dispatch(increment());
 
   return {
-    props: { name },
+    props: { name: data.data },
   };
 });
 
