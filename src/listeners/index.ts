@@ -2,7 +2,7 @@ import { createListenerMiddleware } from '@reduxjs/toolkit';
 import counterReducer, { increment, decrement, incrementByAmount } from 'src/features/counter/counterSlice';
 import { store } from 'src/configs/store';
 import { emptyPokemonApi } from 'src/services/pokemon-api';
-import { emptyMemberApi } from 'src/services/member-api';
+import { emptyTodoApi } from 'src/services/todo-api';
 
 import type {
   TypedStartListening,
@@ -32,10 +32,10 @@ const incListener = async (action: ListenerAction, listenerApi: ListenerApi) => 
   // TODO : RTQuery type 설정
   // const { getPokemonByName }: any = emptyPokemonApi.endpoints;
   // const { data: pokemonData } = await listenerApi.dispatch(getPokemonByName.initiate('bulbasaur'));
-  // const { getMemberInfo }: any = emptyMemberApi.endpoints;
-  // const { data: memberData } = await listenerApi.dispatch(getMemberInfo.initiate());
+  const { getMemberInfo }: any = emptyTodoApi.endpoints;
+  const { data: memberData } = await listenerApi.dispatch(getMemberInfo.initiate());
 
-  // console.log('datadata', memberData);
+  console.log('datadata', memberData);
   // select
   // const resultS = getPokemonByName.select()(listenerApi.getState());
   // const { data, status, error } = resultS;

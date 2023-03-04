@@ -7,13 +7,13 @@ import listenerMiddleware from 'src/listeners';
 import rootReducer from 'src/reducers';
 
 import { pokemonApi } from 'src/services/pokemon';
-import { memberApi } from 'src/services/member';
+import { todoApi } from 'src/services/todo';
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 
 // TODO: injectEndpoints 직접 사용 여부 확인
-const middlewares: Middleware[] = [pokemonApi.middleware, memberApi.middleware];
+const middlewares: Middleware[] = [pokemonApi.middleware, todoApi.middleware];
 
 //(getDefaultMiddleware: any) => getDefaultMiddleware().concat(pokemonApi.middleware);
 
