@@ -13,7 +13,7 @@ const AdminPage = (props: { name: string }) => {
     <>
       <div>admin {name}</div>
       <Grid container height='100vh' alignItems='center' justifyContent='center' direction='column'>
-        <h1>Admin Dashboard</h1>
+        <h1 className='text-blue-500'>Admin Dashboard</h1>
         <Stack direction='row' columnGap={1}>
           <Button variant='text'>Text</Button>
           <Button variant='contained'>Contained</Button>
