@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { store, wrapper } from 'src/configs/store';
+import { Button, Grid, Stack } from '@mui/material';
 import { emptyPokemonApi } from 'src/services/pokemon-api';
 import { decrement, increment } from 'src/features/counter/counterSlice';
 
@@ -11,6 +12,14 @@ const AdminPage = (props: { name: string }) => {
   return (
     <>
       <div>admin {name}</div>
+      <Grid container height='100vh' alignItems='center' justifyContent='center' direction='column'>
+        <h1>Admin Dashboard</h1>
+        <Stack direction='row' columnGap={1}>
+          <Button variant='text'>Text</Button>
+          <Button variant='contained'>Contained</Button>
+          <Button variant='outlined'>Outlined</Button>
+        </Stack>
+      </Grid>
       <CounterComp />
     </>
   );

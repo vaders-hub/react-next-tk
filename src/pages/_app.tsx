@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import type { NextComponentType } from 'next';
 import type { AppProps } from 'next/app';
 
+import 'styles/globals.css';
+
 type CustomNextComponent = NextComponentType & { Layout?: FC };
 type CustomAppProps = AppProps & { Component: CustomNextComponent };
 
